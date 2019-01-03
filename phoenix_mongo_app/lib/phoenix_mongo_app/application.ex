@@ -5,6 +5,12 @@ defmodule PhoenixMongoApp.Application do
 
   use Application
 
+  def get_from_mongo(actor) do
+    connection = MongoApplication.open_connection
+    list = MongoApplication.get_record(connection, %{orator: actor})
+    list
+  end
+
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
